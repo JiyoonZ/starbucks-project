@@ -1,0 +1,117 @@
+/* COMMON */
+
+body {
+  color: #333;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+img {
+  display: block;
+}
+a {
+  text-decoration: none;
+}
+
+/* HEADER */
+
+header {
+  background-color: royalblue;
+}
+
+header .inner {
+  width: 1100px;
+  height: 120px;
+  margin: 0 auto;
+  background-color: orange;
+  position: relative;
+}
+
+/* 포지션 사용시 부모 부분에  position있는지 꼭확인  */
+
+header .logo {
+  height: 75px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  display: none;
+  /* display : none 을 이용해서 잠깐 지우고 구조 세우기 */
+}
+
+/* 
+    img는 인라인 요소 위아래 여백을 못가진다. 
+    글자 요소라고 취급받기 때문에 baseline이 존재함 
+    문자 특성(영어y)때문에 아래에 여백이 출력되는것 
+    따랏 img를 블록 요소 처리하면 여백을 안가짐
+   */
+
+/* 
+    position
+    absolute : 부모요소를 기준으로 하겠다!
+    relative : 나를 기준..?
+    top, bottom: 0 그리고 margin:auto 를 사용해서 가운데로 맞추려면
+    해당 요소의 세로길이 값을 명시해줘야한다! 
+    따라소 가로축 가운데 정렬 하고싶으면 left,right, width를 활용하며 된다. 
+
+   */
+
+/* 메뉴바 */
+
+header .sub-menu {}
+
+/* 상위 요소부터 하나씩 명시하기 만약 앞에 상위 선택자 명시 안했다면 다른 menu라는 클래스에 영향을 미침 (ul과 menu라는 흔한이름이기때문에 자주 사용할가능성 높기때문에 상위요소 모두 명시하기! */
+
+header .sub-menu ul.menu {
+  font-family: Arial, sans-serif;
+  display: flex;
+}
+
+header .sub-menu ul.menu li {
+  position: relative;
+}
+header .sub-menu ul.menu li::before {
+  content: "";
+  width: 1px;
+  height: 12px;
+  background-color: #e5e5e5;
+  position: absolute;
+  /* position : absolute,fixed 는 자동으로 display가 block으로 바뀜 */
+  top:0;
+  bottom: 0;
+  margin: auto;
+}
+
+header .sub-menu ul.menu li:first-child::before {
+  /* sign in 왼쪽편 구분선 없애기 */
+  display: none;
+}
+
+header .sub-menu ul.menu li a {
+  font-size: 12px;
+  /* 클릭영역 늘리기 padding으로 */
+  padding: 11px 16px;
+  display: block;
+  /* block태그로 바꾸는 순간 메뉴바의 주황색이 사라지는 것은 
+  블록태그는 수평 전체를 차지하는 특성을 가졌기때문에 오렌지색을 가려벌인것이다. */
+  color: #656565;
+
+}
+header .sub-menu ul.menu li a:hover { 
+  color: #000;
+}
+
+header .sub-menu .search {
+
+}
+
+header .sub-menu .search input {
+
+}
+
+header .sub-menu .search .material-icons {
+  
+}
