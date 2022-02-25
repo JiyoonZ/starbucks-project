@@ -1,0 +1,396 @@
+/* COMMON */
+body {
+  color: #333;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+img {
+  display: block;
+}
+a {
+  text-decoration: none;
+}
+.inner {
+  width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+.btn {
+  width: 130px;
+  padding: 10px;
+  border: 2px solid #333;
+  border-radius: 4px;
+  color: #333;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  cursor: poiner;
+  box-sizing: border-box;
+  display: block; 
+  /*인라인태그 span..에서 btn클래스 써도 잘먹히도록하기위해서*/
+  transition: .4s;
+}
+.btn:hover {
+  background-color: #333;
+  color: #fff;
+}
+/* 역버전은 바뀌는 부분만 다시 정의하면 된다. */
+.btn.btn--reverse {
+  background-color: #333;
+  color: #fff;
+}
+.btn.btn--reverse:hover {
+  background-color: transparent;
+  color: #333;
+}
+.btn.btn--brown {
+  color: #592B18;
+  border-color: #592B18;
+}
+.btn.btn--brown:hover {
+  color: #FFF;
+  background-color: #592B18;
+}
+.btn.btn--gold {
+  color: #D9AA8A;
+  border-color: #D9AA8A;;
+}
+.btn.btn--gold:hover {
+  color: #FFF;
+  background-color: #D9AA8A;
+}
+.btn.btn--white {
+  color: #FFF;
+  border-color: #FFF;
+}
+.btn.btn--white:hover {
+  color: #333;
+  background-color: #FFF;
+}
+.back-to-position {
+  opacity: 0;
+  transition: 1s;
+}
+.back-to-position.to-right {
+  transform: translateX(-150px);
+}
+.back-to-position.to-left {
+  transform: translateX(150px);
+}
+.show .back-to-position{
+  opacity: 1;
+  transform: translateX(0);
+}
+.show .back-to-position.delay-0{
+  transition-delay: 0s;
+}
+.show .back-to-position.delay-1{
+  transition-delay: .3s;
+}
+.show .back-to-position.delay-2{
+  transition-delay: .6s;
+}
+.show .back-to-position.delay-3{
+  transition-delay: .9s;
+}
+
+/* HEADER */
+header {
+  width: 100%;
+  /* position: relative; */
+  background-color: #f6f5f0;
+  border-bottom: 1px solid #c8c8c8;
+  position: fixed;
+  top: 0;
+  /* fixed로 하면 뷰포트를 기준이됨 따라서 가로너비는 auto값
+    -> auto값은 컨텐츠의 크기에 따라 최소한의 크기만 사용하려고함
+    이러한 현상은 fixed와 absolute에서 발생 (block 요소가 최대한으로 늘어나려고 하지만 이건별개이다~!)
+    ***position fixed 와 absolute는 크기를 최소한으로 사용함
+    */
+    z-index: 9;
+}
+header > .inner {
+  height: 120px; 
+}
+/* 포지션 사용시 부모 부분에  position있는지 꼭확인  */
+header .logo {
+  height: 75px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  /* display: none; */
+  /* display : none 을 이용해서 잠깐 지우고 구조 세우기 */
+}
+
+/* 
+    img는 인라인 요소 위아래 여백을 못가진다. 
+    글자 요소라고 취급받기 때문에 baseline이 존재함 
+    문자 특성(영어y)때문에 아래에 여백이 출력되는것 
+    따랏 img를 블록 요소 처리하면 여백을 안가짐
+   */
+
+/* 
+    position
+    absolute : 부모요소를 기준으로 하겠다!
+    relative : 나를 기준..?
+    top, bottom: 0 그리고 margin:auto 를 사용해서 가운데로 맞추려면
+    해당 요소의 세로길이 값을 명시해줘야한다! 
+    따라소 가로축 가운데 정렬 하고싶으면 left,right, width를 활용하며 된다. 
+
+   */
+
+/* 메뉴바 */
+
+header .sub-menu {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  display: flex;
+
+}
+
+/* 상위 요소부터 하나씩 명시하기 만약 앞에 상위 선택자 명시 안했다면 다른 menu라는 클래스에 영향을 미침 (ul과 menu라는 흔한이름이기때문에 자주 사용할가능성 높기때문에 상위요소 모두 명시하기! */
+
+header .sub-menu ul.menu {
+  font-family: Arial, sans-serif;
+  display: flex;
+}
+
+header .sub-menu ul.menu li {
+  position: relative;
+}
+header .sub-menu ul.menu li::before {
+  content: "";
+  width: 1px;
+  height: 12px;
+  background-color: #e5e5e5;
+  position: absolute;
+  /* position : absolute,fixed 는 자동으로 display가 block으로 바뀜 */
+  top:0;
+  bottom: 0;
+  margin: auto;
+}
+
+header .sub-menu ul.menu li:first-child::before {
+  /* sign in 왼쪽편 구분선 없애기 */
+  display: none;
+}
+
+header .sub-menu ul.menu li a {
+  font-size: 12px;
+  /* 클릭영역 늘리기 padding으로 */
+  padding: 11px 16px;
+  display: block;
+  /* block태그로 바꾸는 순간 메뉴바의 주황색이 사라지는 것은 
+  블록태그는 수평 전체를 차지하는 특성을 가졌기때문에 오렌지색을 가려벌인것이다. */
+  color: #656565;
+
+}
+header .sub-menu ul.menu li a:hover { 
+  color: #000;
+}
+
+header .sub-menu .search {
+  height: 34px;
+  position: relative;
+}
+
+header .sub-menu .search input {
+  width: 36px;
+  height: 34px;
+  padding: 4px 10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 5px;
+  outline: none;
+  background-color: #fff;
+  color: #777;
+  transition: width .4s;
+  font-size: 12px;
+}
+header .sub-menu .search input:focus {
+  width: 190px;
+  border-color: #669900;
+}
+
+header .sub-menu .search .material-icons {
+  height: 24px;
+  /* height값을 줘야 여백 auto값이 먹는다.. */
+  position: absolute; 
+  /* 부모요소 search에 포지션값 주기 */
+  top: 0;
+  bottom: 0;
+  right: 5px;
+  margin: auto;
+  transition: .4s;
+}
+
+header .sub-menu .search.focused .material-icons { 
+  /*.search.focused; 일치선택자*/
+  opacity: 0;
+}
+
+header .main-menu {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+}
+/* 컨텐츠 드롭메뉴 */
+header .main-menu .item {
+  
+}
+header .main-menu .item .item__name {
+  padding: 10px 20px 34px 20px;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+}
+header .main-menu .item:hover .item__name {
+  background-color: #2c2a29;
+  color: #669900;
+  border-radius: 6px 6px 0 0;
+}
+header .main-menu .item .item__contents {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  display: none;
+  /* top이나 bottom 속성을 사용하지 않아 수직위치값이 없다면, 요소의 원래위치를 그대로 사용, 만약 position:absolute를 사용했다면 위치상 부모요소를 기준으로 하므로 화면의 뷰포트 좌우끝까지 늘어날수 없게 된다. */
+}
+header .main-menu .item:hover .item__contents {
+  display: block;
+  
+}
+header .main-menu .item .item__contents .contents__menu {
+  background-color: #2c2a29;  
+  
+}
+header .main-menu .item .item__contents .contents__menu > ul {
+  display: flex;
+  padding: 20px 0;
+}
+header .main-menu .item .item__contents .contents__menu > ul > li {
+  width: 220px;
+}
+header .main-menu .item .item__contents .contents__menu > ul > li h4 {
+  padding: 3px 0 12px 0;
+  font-size: 14px;
+  color: #fff;
+}
+
+header .main-menu .item .item__contents .contents__menu > ul > li ul li{
+  padding: 5px 0;
+  font-size: 12px;
+  color: #999;
+  cursor: pointer;
+}
+header .main-menu .item .item__contents .contents__menu > ul > li ul li:hover{
+  color: #669900;
+}
+header .main-menu .item .item__contents .contents__texture {
+  padding: 26px 0;
+  font-size: 12px;
+  background-image: url("../images/main_menu_pattern.jpg");
+}
+header .main-menu .item .item__contents .contents__texture h4{
+  color: #999;
+  font-weight: 700;
+}
+header .main-menu .item .item__contents .contents__texture p{
+  color: #669900;
+  margin: 4px 0 14px;
+}
+
+header .badges {
+  position: absolute;
+  top: 132px;
+  right: 12px;
+}
+
+header .badges .badge {
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  box-shadow: 4px 4px 10px rgba(0,0,0, .15);
+  cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+  background-color: #272727;
+  border-top: 1px solid #333;
+}
+footer .inner {
+  padding: 40px 0 60px 0;
+}
+footer .menu {
+  display: flex;
+  justify-content: center;
+}
+footer .menu li {
+  position: relative;
+}
+footer .menu li::before {
+  content: "";
+  width: 3px;
+  height: 3px;
+  background-color: #555;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -1px;
+  margin: auto;
+}
+footer .menu li:last-child::before {
+  display: none;
+}
+footer .menu li a {
+  color: #ccc;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 15px;
+  display: block;
+}
+footer .menu li:first-child a {
+  color: #669900;
+}
+footer .btn-group {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+footer .btn-group .btn{
+  font-size: 12px;
+  margin-right: 10px;
+}
+footer .btn-group .btn:last-child{
+  margin-right: 0;
+}
+footer .info {
+ margin-top: 30px;
+ text-align: center;
+}
+footer .info span {
+  margin-right: 20px;
+  color: #999;
+  font-size: 12px;
+}
+footer .info span:last-child {
+  margin-right: 0;
+}
+footer .copyright {
+  color: #999;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 12px;
+}
+footer .logo {
+  margin: 30px auto 0;
+}
+
